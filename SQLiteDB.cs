@@ -16,6 +16,7 @@ namespace _2_DB_Projects
         
         public SQLiteDB(string constr) : base(constr) 
         {
+
             
         }
 
