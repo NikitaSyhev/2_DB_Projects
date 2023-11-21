@@ -57,7 +57,7 @@
             this.cb_BD.FormattingEnabled = true;
             this.cb_BD.Items.AddRange(new object[] {
             "SQLite",
-            "MSSql"});
+            "MS_SQL"});
             this.cb_BD.Location = new System.Drawing.Point(574, 103);
             this.cb_BD.Name = "cb_BD";
             this.cb_BD.Size = new System.Drawing.Size(121, 21);

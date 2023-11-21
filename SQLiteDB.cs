@@ -36,57 +36,6 @@ namespace _2_DB_Projects
             return _dataAdapter;
         }
 
-        public override void OpenConnection() // безопасное открытие БД с проверкой состояния
-        {
-            if (connection.State == System.Data.ConnectionState.Closed)
-            {
-                try
-                {
-                    connection.Open();
-                    MessageBox.Show("Connection Open");
-                }
-                catch (Exception ex)
-                {
-
-                    MessageBox.Show($"Ошибка {ex.Message}");
-                }
-               
-                
-            }
-
-        }
-        
-
-
-        public override void CloseConnection()
-        {
-            if (connection.State==ConnectionState.Open)
-            {
-                connection.Close();
-                MessageBox.Show("Connection Close");
-            }
-        }
-        public override DataTable ExecuteQuerry(string querry)
-        {
-            DataTable dataTable = new DataTable(); 
-            try
-            {
-                OpenConnection();
-                using (SQLiteCommand command = new SQLiteCommand(querry, connection))
-                {
-                    using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(command))
-                    {
-                        adapter.Fill(dataTable);
-                    }
-                }
-            }
-            finally
-            {
-                CloseConnection();
-            }
-            return dataTable;
-
-        }
 
         
     }

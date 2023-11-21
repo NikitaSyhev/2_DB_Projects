@@ -27,9 +27,7 @@ namespace _2_DB_Projects
 
 
         //методы
-        public abstract void OpenConnection();
-        public abstract void CloseConnection();
-        public abstract DataTable ExecuteQuerry(string querry); // для SELECT
+    
         public abstract DbConnection GetConnection();
         public abstract DbDataAdapter GetDataAdapter(string sql);
 
