@@ -27,36 +27,46 @@ namespace _2_DB_Projects
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string choosenBD = cb_BD.SelectedItem.ToString();
-            string filename;
-            if (choosenBD == "SQLite")
+           
+            try
             {
-              
-                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                string choosenBD = cb_BD.SelectedItem.ToString();
+                string filename;
+                if (choosenBD == "SQLite")
                 {
-                    filename = openFileDialog1.FileName;
-                    db = new SQLiteDB(filename);//
+
+                    if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                    {
+                        filename = openFileDialog1.FileName;
+                        db = new SQLiteDB(filename);//
+                    }
+                    //db.OpenConnection();
+                    string sql = "select * from sqlite_master";
+                    DataTable DtProduct = new DataTable();
+                    DbDataAdapter adProduct = db.GetDataAdapter(sql);  // открыли через абстрактный класс
+                    adProduct.Fill(DtProduct);
+                    dataGridView1.DataSource = DtProduct;
                 }
-                //db.OpenConnection();
-                string sql = "select * from sqlite_master";
-                DataTable DtProduct = new DataTable();
-                DbDataAdapter adProduct = db.GetDataAdapter(sql);  // открыли через абстрактный класс
-                adProduct.Fill(DtProduct);
-                dataGridView1.DataSource = DtProduct;
+                else if (choosenBD == "MS_SQL")
+                {
+                    if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                    {
+                        filename = openFileDialog1.FileName;
+                        db = new SQLiteDB(filename);//
+                    }
+                    string sql = "SELECT * FROM INFORMATION_SCHEMA_TABLES";
+                    DataTable DtProduct = new DataTable();
+                    DbDataAdapter adProduct = db.GetDataAdapter(sql);  // открыли через абстрактный класс
+                    adProduct.Fill(DtProduct);
+                    dataGridView1.DataSource = DtProduct;
+                }
             }
-            if(choosenBD == "MS_SQL")
+            catch (Exception ex)
             {
-                if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    filename = openFileDialog1.FileName;
-                    db = new SQLiteDB(filename);//
-                }
-                string sql = "SELECT * FROM master_table";
-                DataTable DtProduct = new DataTable();
-                DbDataAdapter adProduct = db.GetDataAdapter(sql);  // открыли через абстрактный класс
-                adProduct.Fill(DtProduct);
-                dataGridView1.DataSource = DtProduct;
+
+                MessageBox.Show($"Ошибка: {ex.Message}");
             }
+                  
         }
     }
 }
