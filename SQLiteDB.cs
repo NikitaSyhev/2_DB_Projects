@@ -10,14 +10,14 @@ using System.Data.Common;
 
 namespace _2_DB_Projects
 {
-    public class SQLiteDB:DataBase
+    public class SQLiteDB : DataBase
     {
         private SQLiteConnection connection;
         private SQLiteDataAdapter _dataAdapter;
         private DbDataAdapter DataAdapter;
-        public string query = "";  
-        
-        public SQLiteDB(string constr) 
+        public string query = "";
+
+        public SQLiteDB(string constr)
         {
             connection = new SQLiteConnection("DataSource=" + constr);
             ConnectionString = connection.ConnectionString;
@@ -36,7 +36,9 @@ namespace _2_DB_Projects
             return _dataAdapter;
         }
 
-
-        
+        public override bool HasTable(string tableName)
+        {
+            return true;
+        }
     }
 }

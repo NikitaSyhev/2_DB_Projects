@@ -22,7 +22,10 @@ namespace _2_DB_Projects
 
         private DbConnection Connection;
         private DbDataAdapter dataAdapter;
+        private IDataReader reader;
         public string DataAdapter { get; set; }
+        public IDataReader Reader { get; set; }
+        
         //private DbDataTable DataTables;
 
 
@@ -31,7 +34,7 @@ namespace _2_DB_Projects
         public abstract DbConnection GetConnection();
         public abstract DbDataAdapter GetDataAdapter(string sql);
 
-
+        public abstract bool HasTable(string tableName);
 
     }
 }

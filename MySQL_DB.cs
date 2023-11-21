@@ -36,6 +36,11 @@ namespace _2_DB_Projects
             dataAdapter = _dataAdapter;
             return _dataAdapter;
         }
+
+        public override bool HasTable(string tableName)
+        {
+           return true;
+        }
     }
 
 }

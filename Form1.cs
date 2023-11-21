@@ -49,12 +49,9 @@ namespace _2_DB_Projects
                 }
                 else if (choosenBD == "MS_SQL")
                 {
-                    if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                    {
-                        filename = openFileDialog1.FileName;
-                        db = new SQLiteDB(filename);//
-                    }
-                    string sql = "SELECT * FROM INFORMATION_SCHEMA_TABLES";
+                    string connectionString = "Server=localhost;Database=Library;Trusted_Connection=True;"; ;
+                    db = new MsSQL_DB(connectionString);
+                    string sql = "SELECT * FROM INFORMATION_SCHEMA.TABLES";
                     DataTable DtProduct = new DataTable();
                     DbDataAdapter adProduct = db.GetDataAdapter(sql);  // открыли через абстрактный класс
                     adProduct.Fill(DtProduct);
